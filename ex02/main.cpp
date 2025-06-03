@@ -6,53 +6,52 @@
 /*   By: kmummadi <kmummadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 19:08:42 by kmummadi          #+#    #+#             */
-/*   Updated: 2025/06/01 19:09:44 by kmummadi         ###   ########.fr       */
+/*   Updated: 2025/06/04 00:44:44 by kmummadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ClapTrap.hpp"
-#include "utils.hpp"
+#include "FragTrap.hpp"
 
 int main() {
   section("Test 1: Instantiation & Cleanup");
   {
-    ClapTrap john("John");
+    FragTrap ft("Fraggy");
   }
 
   section("Test 2: Copy Constructor & Assignment");
   {
-    ClapTrap alpha("Alpha");
-    ClapTrap beta(alpha);
-    ClapTrap gamma("Gamma");
-    gamma = alpha;
+    FragTrap a("Alpha");
+    FragTrap b(a);
+    FragTrap c("Gamma");
+    c = a;
   }
 
   section("Test 3: Attack / Damage / Repair (Normal Flow)");
   {
-    ClapTrap attacker("Attacker");
-    ClapTrap target("Target");
+    FragTrap attacker("Attacker");
+    FragTrap target("Target");
 
     attacker.attack("Target");
-    target.takeDamage(4);
-    target.beRepaired(3);
+    target.takeDamage(30);
+    target.beRepaired(25);
     target.attack("Attacker");
-    attacker.takeDamage(6);
-    attacker.beRepaired(5);
+    attacker.takeDamage(40);
+    attacker.beRepaired(10);
   }
 
   section("Test 4: Repeated Attacks Until Energy Runs Out");
   {
-    ClapTrap spam("Spammer");
-    for (int i = 0; i < 11; ++i) {
+    FragTrap spammer("Spammer");
+    for (int i = 0; i < 101; ++i) {
       std::cout << "Attack " << i + 1 << ": ";
-      spam.attack("TargetDummy");
+      spammer.attack("Dummy");
     }
   }
 
   section("Test 5: Repeated Repairs Until Energy Runs Out");
   {
-    ClapTrap healer("Healer");
-    for (int i = 0; i < 10; ++i) {
+    FragTrap healer("Healer");
+    for (int i = 0; i < 100; ++i) {
       std::cout << "Repair " << i + 1 << ": ";
       healer.beRepaired(1);
     }
@@ -60,35 +59,40 @@ int main() {
     healer.beRepaired(1);
   }
 
-  section("Test 6: Actions After Death (0 Hitpoints)");
+  section("Test 6: Actions After Death");
   {
-    ClapTrap ghost("Ghost");
-    ghost.takeDamage(10); // Kill it
+    FragTrap ghost("Ghost");
+    ghost.takeDamage(100);
     ghost.attack("Someone");
-    ghost.beRepaired(5);
+    ghost.beRepaired(10);
   }
 
-  section("Test 7: Overkill and Invalid Revival");
+  section("Test 7: Overkill and No Resurrection");
   {
-    ClapTrap overkill("Overkill");
-    overkill.takeDamage(50);  // Kill it hard
-    overkill.beRepaired(100); // Should not revive
-    overkill.attack("Still Dead");
+    FragTrap frag("Overfrag");
+    frag.takeDamage(150);
+    frag.beRepaired(200);
+    frag.attack("Still Dead");
   }
 
-  section("Test 8: Cycle Damage and Repair (Stress Test)");
+  section("Test 8: Damage/Repair Stress Test");
   {
-    ClapTrap tank("Tank");
-    for (int i = 1; i <= 5; ++i) {
-      std::cout << "Cycle " << i << ": ";
-      tank.takeDamage(2);
-      tank.beRepaired(1);
+    FragTrap test("Tanky");
+    for (int i = 0; i < 5; ++i) {
+      std::cout << "Cycle " << i + 1 << ": ";
+      test.takeDamage(10);
+      test.beRepaired(5);
     }
-    tank.attack("Enemy");
+    test.attack("Target");
   }
 
-  colorprint("\n✅ All tests executed. Please review printed logs above to "
-             "verify correct behavior.\n",
+  section("Test 9: Special Ability - High Fives");
+  {
+    FragTrap friendly("Buddy");
+    friendly.highFivesGuys();
+  }
+
+  colorprint("\\n✅ All FragTrap tests completed. Review logs for behavior.\\n",
              BLUE);
   return 0;
 }

@@ -1,10 +1,10 @@
 
-NAME        := claptrap
+NAME        := fragtrap
 CXX         := c++
 CXXFLAGS    := -Wall -Wextra -Werror -Wpedantic -std=c++17 #-g
 OBJDIR      := obj
 
-SRCS        := main.cpp ClapTrap.cpp utils.cpp
+SRCS        := main.cpp ClapTrap.cpp utils.cpp FragTrap.cpp
 OBJS        := $(SRCS:%.cpp=$(OBJDIR)/%.o)
 
 all: $(NAME)
