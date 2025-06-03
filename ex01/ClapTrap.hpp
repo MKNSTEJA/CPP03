@@ -6,7 +6,7 @@
 /*   By: kmummadi <kmummadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 11:22:45 by kmummadi          #+#    #+#             */
-/*   Updated: 2025/06/04 00:08:43 by kmummadi         ###   ########.fr       */
+/*   Updated: 2025/06/04 00:07:47 by kmummadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <iostream>
 
 class ClapTrap {
-private:
+protected:
   std::string _name;
   unsigned int _hitpoints;
   unsigned int _energypoints;
