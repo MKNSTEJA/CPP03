@@ -12,6 +12,7 @@
 
 #include "ScavTrap.hpp"
 #include "utils.hpp"
+#include <iostream>
 
 int main() {
   section("Test 1: Instantiation & Cleanup");
@@ -43,7 +44,7 @@ int main() {
   section("Test 4: Repeated Attacks Until Energy Runs Out");
   {
     ScavTrap spam("Spammer");
-    for (int i = 0; i < 51; ++i) {
+    for (int i = 0; i < 52; ++i) {
       std::cout << "Attack " << i + 1 << ": ";
       spam.attack("TargetDummy");
     }
@@ -93,8 +94,6 @@ int main() {
     guard.guardGate();
   }
 
-  colorprint("\\n✅ All ScavTrap tests executed. Please review printed logs "
-             "above to verify correct behavior.\\n",
-             BLUE);
+  colorprint("\nSUCCESS\n", GREEN);
   return 0;
 }

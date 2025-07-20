@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "utils.hpp"
+#include <iostream>
 
 void colorprint(std::string str, const std::string color) {
   std::cout << colortxt(str, color);

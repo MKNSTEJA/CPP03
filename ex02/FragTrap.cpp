@@ -11,20 +11,21 @@
 /* ************************************************************************** */
 
 #include "FragTrap.hpp"
+#include <iostream>
 
 // Constructors and Destructors
 FragTrap::FragTrap() : ClapTrap() {
   _name = "Anonymous";
   _hitpoints = 100;
-  _attackdamage = 20;
-  _energypoints = 50;
+  _attackdamage = 30;
+  _energypoints = 100;
   colorprint("Default constructor of Fragtrap " + _name + " called\n", GREEN);
 }
 
 FragTrap::FragTrap(const std::string &name) : ClapTrap(name) {
   _hitpoints = 100;
-  _attackdamage = 20;
-  _energypoints = 50;
+  _attackdamage = 30;
+  _energypoints = 100;
   colorprint("Parametrised constructor of Fragtrap " + _name + " called\n",
              GREEN);
 }
@@ -47,5 +48,5 @@ FragTrap::~FragTrap() {
 
 // Member functions
 void FragTrap::highFivesGuys() {
-  std::cout << "FragTrap " << _name << " says: ✋ High fives, guys!\n";
+  std::cout << "FragTrap " << _name << " requests a High-Five!\n";
 }

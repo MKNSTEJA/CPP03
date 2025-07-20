@@ -12,17 +12,18 @@
 
 #include "ClapTrap.hpp"
 #include "utils.hpp"
+#include <iostream>
 
 // Constructors and Destructors
 ClapTrap::ClapTrap()
-    : _name("Anonymous"), _hitpoints(10), _energypoints(10), _attackdamage(10) {
+    : _name("Anonymous"), _hitpoints(10), _energypoints(10), _attackdamage(0) {
   std::string msg;
   msg = "Default constructor of ClapTrap \"" + _name + "\" called.\n";
   colorprint(msg, GREEN);
 }
 
 ClapTrap::ClapTrap(const std::string &name)
-    : _name(name), _hitpoints(10), _energypoints(10), _attackdamage(10) {
+    : _name(name), _hitpoints(10), _energypoints(10), _attackdamage(0) {
   std::string msg;
 
   msg = "Parametrised constructor of ClapTrap \"" + _name + "\" called.\n";
@@ -87,9 +88,9 @@ void ClapTrap::attack(const std::string &target) {
   if (_energypoints > 0 && _hitpoints > 0) {
     --_energypoints;
     std::cout << "Claptrap " + _name + " attacks " + target + ", causing "
-              << _attackdamage << "points of damage!\n";
+              << _attackdamage << " points of damage!\n";
   } else if (_hitpoints == 0) {
-    colorprint("ClapTrap " + _name + " lacks hitpoints to attack\n", ORANGE);
+    colorprint("ClapTrap " + _name + " has died and cannot attack\n", ORANGE);
   } else if (_energypoints == 0) {
     colorprint("ClapTrap " + _name + " lacks energypoints to attack\n", ORANGE);
   }
@@ -98,20 +99,24 @@ void ClapTrap::attack(const std::string &target) {
 void ClapTrap::takeDamage(unsigned int amount) {
   std::cout << "Claptrap " << _name << " has taken -" << amount
             << "HP damage\n";
-  if (_hitpoints >= amount) {
+  if (_hitpoints > amount) {
     _hitpoints -= amount;
     std::cout << "HP left: " << _hitpoints << "\n";
   } else {
+    _hitpoints = 0;
     colorprint(_name + " died!\n", ORANGE);
   }
 }
 
 void ClapTrap::beRepaired(unsigned int amount) {
-  if (_energypoints > 0) {
+  if (_energypoints > 0 && _hitpoints > 0) {
     _energypoints--;
     _hitpoints += amount;
     std::cout << "Claptrap " << _name << " has gained " << amount << "HP\n";
-  } else
+  } else if (_energypoints == 0) {
     colorprint("Claptrap " + _name + " lacks energypoints to repair itself\n",
+               ORANGE);
+  } else if (_hitpoints == 0)
+    colorprint("Claptrap " + _name + " has died and cannot repair itself\n",
                ORANGE);
 }

@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "FragTrap.hpp"
+#include <iostream>
 
 int main() {
   section("Test 1: Instantiation & Cleanup");
@@ -42,7 +43,7 @@ int main() {
   section("Test 4: Repeated Attacks Until Energy Runs Out");
   {
     FragTrap spammer("Spammer");
-    for (int i = 0; i < 101; ++i) {
+    for (int i = 0; i < 102; ++i) {
       std::cout << "Attack " << i + 1 << ": ";
       spammer.attack("Dummy");
     }
@@ -51,7 +52,7 @@ int main() {
   section("Test 5: Repeated Repairs Until Energy Runs Out");
   {
     FragTrap healer("Healer");
-    for (int i = 0; i < 100; ++i) {
+    for (int i = 0; i < 101; ++i) {
       std::cout << "Repair " << i + 1 << ": ";
       healer.beRepaired(1);
     }
@@ -92,7 +93,6 @@ int main() {
     friendly.highFivesGuys();
   }
 
-  colorprint("\\n✅ All FragTrap tests completed. Review logs for behavior.\\n",
-             BLUE);
+  colorprint("\nSUCCESS\n", GREEN);
   return 0;
 }

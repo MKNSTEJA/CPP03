@@ -13,6 +13,7 @@
 #include "ScavTrap.hpp"
 #include "ClapTrap.hpp"
 #include "utils.hpp"
+#include <iostream>
 
 // Constructors and Destructors
 ScavTrap::ScavTrap() : ClapTrap() {
@@ -51,8 +52,8 @@ ScavTrap::~ScavTrap() {
 void ScavTrap::attack(const std::string &target) {
   if (_energypoints > 0 && _hitpoints > 0) {
     --_energypoints;
-    std::cout << "Scavtrap " + _name + " attacks " + target + ", causing"
-              << _attackdamage << "points of damage!\n";
+    std::cout << "Scavtrap " + _name + " attacks " + target + ", causing "
+              << _attackdamage << " points of damage!\n";
   } else if (_hitpoints == 0) {
     colorprint("ScavTrap " + _name + " lacks hitpoints to attack\n", ORANGE);
   } else if (_energypoints == 0) {
